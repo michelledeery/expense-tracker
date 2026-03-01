@@ -16,7 +16,7 @@
 
 .add-expense-form {
   display: grid;
-  grid-template-columns: minmax(6rem, 11rem) minmax(6rem, 9rem) minmax(8rem, 10rem) minmax(11rem, 14rem) auto;
+  grid-template-columns: minmax(12rem, 22rem) minmax(6rem, 9rem) minmax(8rem, 10rem) minmax(11rem, 14rem) auto;
   gap: 0.6rem;
   align-items: end;
   max-width: 100%;
