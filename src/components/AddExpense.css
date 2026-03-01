@@ -16,7 +16,7 @@
 
 .add-expense-form {
   display: grid;
-  grid-template-columns: 1fr minmax(4.5rem, 5.5rem) minmax(8rem, 9rem) minmax(8rem, 9rem) auto;
+  grid-template-columns: minmax(6rem, 11rem) minmax(6rem, 9rem) minmax(8rem, 10rem) minmax(11rem, 14rem) auto;
   gap: 0.6rem;
   align-items: end;
   max-width: 100%;
@@ -38,7 +38,7 @@
 .input-date {
   min-width: 0;
   width: 100%;
-  max-width: 9.5rem;
+  max-width: 10rem;
 }
 
 @media (max-width: 700px) {
@@ -89,12 +89,12 @@
 .input-amount {
   width: 100%;
   min-width: 0;
-  max-width: 5.5rem;
+  max-width: 9rem;
 }
 
 .select {
   min-width: 0;
-  max-width: 9.5rem;
+  max-width: 14rem;
   width: 100%;
   cursor: pointer;
 }
