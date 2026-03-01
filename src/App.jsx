@@ -3,6 +3,7 @@ import './App.css'
 import TabSwitcher from './components/TabSwitcher'
 import CurrencySelect from './components/CurrencySelect'
 import AddExpense from './components/AddExpense'
+import BulkAddExpenses from './components/BulkAddExpenses'
 import ExpenseList from './components/ExpenseList'
 import AllExpenses from './components/AllExpenses'
 import Summary from './components/Summary'
@@ -22,6 +23,7 @@ const DEFAULT_CATEGORIES = [
 function App() {
   const [data, setData] = useState(() => loadAll())
   const [activeTab, setActiveTab] = useState('personal')
+  const [showBulkAdd, setShowBulkAdd] = useState(false)
 
   const expenses = data[activeTab]
   const currency = data.currency || 'USD'
@@ -75,6 +77,21 @@ function App() {
       <main className="main">
         <Summary expenses={expenses} currency={currency} />
         <AddExpense categories={categories} onAdd={addExpense} onAddCategory={addCategory} />
+        {!showBulkAdd ? (
+          <button
+            type="button"
+            className="bulk-add-toggle-btn"
+            onClick={() => setShowBulkAdd(true)}
+          >
+            Bulk add expenses
+          </button>
+        ) : (
+          <BulkAddExpenses
+            onAdd={addExpense}
+            defaultCategory={categories[0] || 'Other'}
+            onClose={() => setShowBulkAdd(false)}
+          />
+        )}
         <ExpenseList expenses={expenses} onDelete={deleteExpense} currency={currency} />
         <AllExpenses expenses={expenses} currency={currency} onDelete={deleteExpense} />
       </main>

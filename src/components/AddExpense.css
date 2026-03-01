@@ -22,14 +22,15 @@
   max-width: 100%;
 }
 
-.add-expense-date-wrap {
+.add-expense-date-wrap,
+.add-expense-category-wrap {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
   min-width: 0;
 }
 
-.add-expense-date-label {
+.add-expense-field-label {
   font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 500;

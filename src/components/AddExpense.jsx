@@ -66,7 +66,7 @@ function AddExpense({ categories, onAdd, onAddCategory }) {
           aria-label="Expense amount"
         />
         <div className="add-expense-date-wrap">
-          <label htmlFor="add-expense-date" className="add-expense-date-label">
+          <label htmlFor="add-expense-date" className="add-expense-field-label">
             Date
           </label>
           <input
@@ -78,19 +78,25 @@ function AddExpense({ categories, onAdd, onAddCategory }) {
             aria-label="Expense date"
           />
         </div>
-        <select
-          value={category}
-          onChange={handleCategoryChange}
-          className="select"
-          aria-label="Expense category"
-        >
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-          <option value={ADD_NEW_VALUE}>+ Add new category...</option>
-        </select>
+        <div className="add-expense-category-wrap">
+          <label htmlFor="add-expense-category" className="add-expense-field-label">
+            Category
+          </label>
+          <select
+            id="add-expense-category"
+            value={category}
+            onChange={handleCategoryChange}
+            className="select"
+            aria-label="Expense category"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+            <option value={ADD_NEW_VALUE}>+ Add new category...</option>
+          </select>
+        </div>
         <button type="submit" className="btn btn-primary">
           Add
         </button>
