@@ -35,6 +35,8 @@
   font-size: 2rem;
   font-weight: 400;
   color: var(--accent);
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .summary-by-category {
@@ -66,4 +68,6 @@
 .category-amount {
   font-weight: 600;
   color: var(--text);
+  white-space: nowrap;
+  overflow: visible;
 }

@@ -146,6 +146,8 @@
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--accent);
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .all-expenses .empty-state {

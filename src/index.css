@@ -11,8 +11,8 @@
   --danger-dim: rgba(239, 68, 68, 0.15);
   --radius: 12px;
   --radius-sm: 8px;
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 *,
