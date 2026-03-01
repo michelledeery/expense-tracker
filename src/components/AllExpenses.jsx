@@ -38,22 +38,14 @@ function AllExpenses({ expenses, currency, onDelete }) {
     [expenses, viewMode, selectedMonthKey]
   )
   const monthlyTotal = monthlyExpenses.reduce((sum, e) => sum + e.amount, 0)
-
-  if (expenses.length === 0) {
-    return (
-      <section className="all-expenses">
-        <h2>All expenses</h2>
-        <p className="empty-state">No expenses yet.</p>
-      </section>
-    )
-  }
+  const hasExpenses = expenses.length > 0
 
   return (
     <section className="all-expenses">
       <div className="all-expenses-controls" aria-label="View and filter">
-          <div className="controls-row">
-            <span className="controls-label">View:</span>
-            <div className="view-toggle" role="tablist" aria-label="View">
+        <div className="controls-row">
+          <span className="controls-label">View:</span>
+          <div className="view-toggle" role="tablist" aria-label="View">
             <button
               type="button"
               role="tab"
@@ -72,32 +64,38 @@ function AllExpenses({ expenses, currency, onDelete }) {
             >
               Monthly
             </button>
-            </div>
           </div>
-          <div className={`month-dropdown-wrap ${viewMode !== 'monthly' ? 'month-dropdown-disabled' : ''}`}>
-            <label htmlFor="month-select" className="month-dropdown-label">
-              Month:
-            </label>
-            <select
-              id="month-select"
-              className="month-dropdown"
-              value={selectedMonthKey}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-              disabled={viewMode !== 'monthly'}
-              aria-label="Select month"
-            >
-              {monthOptions.map(({ key, label }) => (
+        </div>
+        <div className={`month-dropdown-wrap ${viewMode !== 'monthly' ? 'month-dropdown-disabled' : ''}`}>
+          <label htmlFor="month-select" className="month-dropdown-label">
+            Month:
+          </label>
+          <select
+            id="month-select"
+            className="month-dropdown"
+            value={selectedMonthKey}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            disabled={viewMode !== 'monthly'}
+            aria-label="Select month"
+          >
+            {monthOptions.length === 0 ? (
+              <option value="">No months yet</option>
+            ) : (
+              monthOptions.map(({ key, label }) => (
                 <option key={key} value={key}>
                   {label}
                 </option>
-              ))}
-            </select>
-          </div>
+              ))
+            )}
+          </select>
+        </div>
       </div>
 
       <h2 className="all-expenses-title">All expenses</h2>
 
-      {viewMode === 'all' ? (
+      {!hasExpenses ? (
+        <p className="empty-state">No expenses yet.</p>
+      ) : viewMode === 'all' ? (
         <ul className="expense-ul">
           {expenses.map((exp) => (
             <ExpenseItem key={exp.id} exp={exp} currency={currency} onDelete={onDelete} />
