@@ -2,7 +2,7 @@ const STORAGE_KEY = 'expense-tracker-expenses'
 
 const CURRENCIES = ['USD', 'CAD', 'GBP']
 
-const defaultData = () => ({ personal: [], business: [], currency: 'USD' })
+const defaultData = () => ({ personal: [], business: [], currency: 'USD', customCategories: [] })
 
 export function loadAll() {
   try {
@@ -13,6 +13,7 @@ export function loadAll() {
       personal: Array.isArray(data.personal) ? data.personal : [],
       business: Array.isArray(data.business) ? data.business : [],
       currency: CURRENCIES.includes(data.currency) ? data.currency : 'USD',
+      customCategories: Array.isArray(data.customCategories) ? data.customCategories : [],
     }
   } catch {
     return defaultData()

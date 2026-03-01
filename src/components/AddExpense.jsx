@@ -6,11 +6,26 @@ function getTodayStr() {
   return d.toISOString().slice(0, 10)
 }
 
-function AddExpense({ categories, onAdd }) {
+const ADD_NEW_VALUE = '__add_new_category__'
+
+function AddExpense({ categories, onAdd, onAddCategory }) {
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState('')
   const [category, setCategory] = useState(categories[0] || 'Other')
   const [date, setDate] = useState(() => getTodayStr())
+
+  const handleCategoryChange = (e) => {
+    const value = e.target.value
+    if (value === ADD_NEW_VALUE) {
+      const name = window.prompt('Enter new category name:')
+      if (name && name.trim()) {
+        onAddCategory?.(name.trim())
+        setCategory(name.trim())
+      }
+      return
+    }
+    setCategory(value)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,7 +39,7 @@ function AddExpense({ categories, onAdd }) {
     })
     setDescription('')
     setAmount('')
-    setCategory(categories[0] || 'Other')
+    setCategory(category && categories.includes(category) ? category : categories[0] || 'Other')
     setDate(getTodayStr())
   }
 
@@ -65,7 +80,7 @@ function AddExpense({ categories, onAdd }) {
         </div>
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={handleCategoryChange}
           className="select"
           aria-label="Expense category"
         >
@@ -74,6 +89,7 @@ function AddExpense({ categories, onAdd }) {
               {cat}
             </option>
           ))}
+          <option value={ADD_NEW_VALUE}>+ Add new category...</option>
         </select>
         <button type="submit" className="btn btn-primary">
           Add

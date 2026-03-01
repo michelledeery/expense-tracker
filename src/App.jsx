@@ -8,7 +8,7 @@ import AllExpenses from './components/AllExpenses'
 import Summary from './components/Summary'
 import { loadAll, saveAll, CURRENCIES } from './utils/storage'
 
-const CATEGORIES = [
+const DEFAULT_CATEGORIES = [
   'Food & Dining',
   'Transport',
   'Shopping',
@@ -25,6 +25,18 @@ function App() {
 
   const expenses = data[activeTab]
   const currency = data.currency || 'USD'
+  const categories = [...DEFAULT_CATEGORIES, ...(data.customCategories || [])]
+
+  const addCategory = (name) => {
+    const trimmed = name.trim()
+    if (!trimmed) return
+    const existing = [...DEFAULT_CATEGORIES, ...(data.customCategories || [])]
+    if (existing.some((c) => c.toLowerCase() === trimmed.toLowerCase())) return
+    setData((prev) => ({
+      ...prev,
+      customCategories: [...(prev.customCategories || []), trimmed],
+    }))
+  }
 
   useEffect(() => {
     saveAll(data)
@@ -62,7 +74,7 @@ function App() {
 
       <main className="main">
         <Summary expenses={expenses} currency={currency} />
-        <AddExpense categories={CATEGORIES} onAdd={addExpense} />
+        <AddExpense categories={categories} onAdd={addExpense} onAddCategory={addCategory} />
         <ExpenseList expenses={expenses} onDelete={deleteExpense} currency={currency} />
         <AllExpenses expenses={expenses} currency={currency} onDelete={deleteExpense} />
       </main>
